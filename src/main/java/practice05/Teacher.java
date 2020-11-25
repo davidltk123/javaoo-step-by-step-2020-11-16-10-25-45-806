@@ -1,7 +1,7 @@
 package practice05;
 
 public class Teacher extends Person{
-    private int klass;
+    private Integer klass;
     public Teacher(String name, int age, int klass) {
         super(name, age);
         this.klass = klass;
@@ -17,10 +17,6 @@ public class Teacher extends Person{
 
     @Override
     public String introduce() {
-        if(klass == 0){
-            return super.introduce()+" I am a Teacher. I teach No Class.";
-        }else{
-            return super.introduce()+" I am a Teacher. I teach Class "+this.klass+".";
-        }
+        return String.format("%s I am a Teacher. I teach %s.",super.introduce(),(klass==null?"No Class":"Class "+this.klass));
     }
 }

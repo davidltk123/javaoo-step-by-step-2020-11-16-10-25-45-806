@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Teacher extends Person{
-    //private Klass klass;
+public class Teacher extends Person {
     private List<Klass> classes = new ArrayList<Klass>();
 
     public Teacher(int id, String name, int age) {
@@ -17,44 +16,28 @@ public class Teacher extends Person{
         this.classes = classes;
     }
 
-    public List<Klass> getClasses(){
+    public List<Klass> getClasses() {
         return this.classes;
     }
 
-    public String introduceWith(Student student){
-        String result = super.introduce()+" I am a Teacher. ";
-        if(isTeaching(student)){
-            result += "I teach ";
-        }
-        else{
-            result += "I don't teach ";
-        }
-        result += student.getName() +".";
-
-        return result;
+    public String introduceWith(Student student) {
+        return String.format("%s I am a Teacher. I %s %s.", super.introduce(), (isTeaching(student) ? "teach" : "don't teach"), student.getName());
     }
 
     @Override
     public String introduce() {
-        String result = super.introduce()+" I am a Teacher. I teach ";
-        if(this.classes.isEmpty()){
-            result += "No Class.";
-        }else{
-            List<String> classNumbers  = this.classes.stream().map(item -> String.valueOf(item.getNumber())).collect(Collectors.toList());
-            String classesString = classNumbers.stream().reduce("Class ",(classString,item) -> {
-                if(classNumbers.indexOf(item)==classNumbers.size()-1){
-                    return classString+item+".";
-                } else{
-                    return classString+item+", ";
-                }
-            });
-            result += classesString;
-        }
-        return result;
+        List<String> classNumbers = this.classes.stream().map(item -> String.valueOf(item.getNumber())).collect(Collectors.toList());
+        String classesString = classNumbers.stream().reduce("Class ", (classString, item) -> {
+            if (classNumbers.indexOf(item) == classNumbers.size() - 1) {
+                return classString + item + ".";
+            } else {
+                return classString + item + ", ";
+            }
+        });
+        return String.format("%s I am a Teacher. I teach %s", super.introduce(), (this.classes.isEmpty() ? "No Class." : classesString));
     }
 
-    public boolean isTeaching(Student student){
-        List<Klass> classesIn  = this.classes.stream().filter(item -> item.isIn(student)).collect(Collectors.toList());
-        return !classesIn.isEmpty();
+    public boolean isTeaching(Student student) {
+        return this.classes.stream().filter(_class -> _class.isIn(student)).count()>0;
     }
 }

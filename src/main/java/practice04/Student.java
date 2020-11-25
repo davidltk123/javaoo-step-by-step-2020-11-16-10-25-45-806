@@ -13,6 +13,6 @@ public class Student extends Person{
 
     @Override
     public String introduce() {
-        return super.introduce()+" I am a Student. I am at Class "+this.klass+".";
+        return String.format("%s I am a Student. I am at Class %s.",super.introduce(),this.klass);
     }
 }

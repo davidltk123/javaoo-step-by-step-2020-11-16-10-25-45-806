@@ -21,6 +21,6 @@ public class Klass {
     }
 
     public String getDisplayName(){
-        return "Class "+ this.number;
+        return String.format("Class %s",this.number);
     }
 }

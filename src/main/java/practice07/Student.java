@@ -15,13 +15,7 @@ public class Student extends Person{
 
     @Override
     public String introduce() {
-        String result = super.introduce() + " I am a Student. ";
-        if(this.klass.getLeader() != null && this.klass.getLeader().equals(this)){
-            result += "I am Leader of ";
-        }else{
-            result += "I am at ";
-        }
-        result += this.klass.getDisplayName() + ".";
-        return result;
+        boolean isLeader = this.klass.getLeader() != null && this.klass.getLeader().equals(this);
+        return String.format("%s I am a Student. I am %s %s.",super.introduce(),(isLeader?"Leader of":"at"),this.klass.getDisplayName());
     }
 }

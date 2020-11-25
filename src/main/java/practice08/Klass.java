@@ -7,10 +7,11 @@ public class Klass {
 
     private int number;
     private Student leader;
-    private List<Student> students = new ArrayList<Student>();
+    private List<Student> students;
 
     public Klass(int number){
         this.number=number;
+        this.students = new ArrayList<Student>();
     }
 
     public int getNumber(){
@@ -31,10 +32,12 @@ public class Klass {
     }
 
     public void appendMember(Student student){
-        this.students.add(student);
+        if(!this.students.contains(student)){
+            this.students.add(student);
+        }
     }
 
     public String getDisplayName(){
-        return "Class "+ this.number;
+        return String.format("Class %s",this.number);
     }
 }

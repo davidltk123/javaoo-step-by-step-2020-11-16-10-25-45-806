@@ -18,26 +18,12 @@ public class Teacher extends Person{
     }
 
     public String introduceWith(Student student){
-        String result = super.introduce()+" I am a Teacher. ";
-        if(student.getKlass().getNumber()==this.getKlass().getNumber()){
-            result += "I teach ";
-        }
-        else{
-            result += "I don't teach ";
-        }
-        result += student.getName() +".";
-
-        return result;
+        boolean isSameClass = student.getKlass().getNumber()==this.getKlass().getNumber();
+        return String.format("%s I am a Teacher. I %s %s.",super.introduce(),(isSameClass?"teach":"don't teach"),student.getName());
     }
 
     @Override
     public String introduce() {
-        String result = super.introduce()+" I am a Teacher. I teach ";
-        if(klass == null){
-            result += "No Class.";
-        }else{
-            result += this.klass.getDisplayName()+".";
-        }
-        return result;
+        return String.format("%s I am a Teacher. I teach %s.",super.introduce(),(klass==null?"No Class":this.klass.getDisplayName()));
     }
 }
