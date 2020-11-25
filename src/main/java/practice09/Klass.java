@@ -34,7 +34,7 @@ public class Klass {
     }
 
     public boolean isIn(Student student){
-        return students.contains(student);
+        return student.getKlass().equals(this);
     }
 
     public String getDisplayName(){

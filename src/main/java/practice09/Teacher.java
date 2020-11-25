@@ -23,7 +23,7 @@ public class Teacher extends Person{
 
     public String introduceWith(Student student){
         String result = super.introduce()+" I am a Teacher. ";
-        if(this.classes.contains(student.getKlass())){
+        if(isTeaching(student)){
             result += "I teach ";
         }
         else{
@@ -37,7 +37,7 @@ public class Teacher extends Person{
     @Override
     public String introduce() {
         String result = super.introduce()+" I am a Teacher. I teach ";
-        if(this.classes.size() == 0){
+        if(this.classes.isEmpty()){
             result += "No Class.";
         }else{
             List<String> classNumbers  = this.classes.stream().map(item -> String.valueOf(item.getNumber())).collect(Collectors.toList());
@@ -54,6 +54,7 @@ public class Teacher extends Person{
     }
 
     public boolean isTeaching(Student student){
-        return this.classes.contains(student.getKlass());
+        List<Klass> classesIn  = this.classes.stream().filter(item -> item.isIn(student)).collect(Collectors.toList());
+        return !classesIn.isEmpty();
     }
 }
