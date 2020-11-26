@@ -39,11 +39,11 @@ public class Teacher extends Person {
         return this.classes.stream().filter(_class -> _class.isIn(student)).count()>0;
     }
 
-    public void introduceNew(Klass kclass, Student student,boolean isLeader) {
-        if(isLeader){
-            System.out.print(String.format("I am %s. I know %s become Leader of %s.\n",this.getName(),student.getName(),kclass.getDisplayName()));
+    public void introduceNew(Student student) {
+        if(student.equals(student.getKlass().getLeader())){
+            System.out.print(String.format("I am %s. I know %s become Leader of %s.\n",this.getName(),student.getName(),student.getKlass().getDisplayName()));
         }else{
-            System.out.print(String.format("I am %s. I know %s has joined %s.\n",this.getName(),student.getName(),kclass.getDisplayName()));
+            System.out.print(String.format("I am %s. I know %s has joined %s.\n",this.getName(),student.getName(),student.getKlass().getDisplayName()));
         }
     }
 }

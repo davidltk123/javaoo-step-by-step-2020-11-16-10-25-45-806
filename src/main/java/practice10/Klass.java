@@ -25,7 +25,7 @@ public class Klass {
     public void assignLeader(Student leader){
         if(students.contains(leader)){
             this.leader = leader;
-            notisfyTeacher(this, leader, true);
+            notisfyTeacher(leader);
         }
         else{
             System.out.print("It is not one of us.\n");
@@ -36,15 +36,18 @@ public class Klass {
         this.teacher = teacher;
     }
 
-    public void notisfyTeacher(Klass klass, Student student, boolean isLeader){
+    public void notisfyTeacher(Student student){
         if(this.teacher!=null){
-            this.teacher.introduceNew(klass,student,isLeader);
+            this.teacher.introduceNew(student);
         }
     }
 
     public void appendMember(Student student){
         this.students.add(student);
-        this.notisfyTeacher(this,student, false);
+        if(!student.getKlass().equals(this)){
+            student.setKlass(this);
+        }
+        this.notisfyTeacher(student);
     }
 
     public boolean isIn(Student student){

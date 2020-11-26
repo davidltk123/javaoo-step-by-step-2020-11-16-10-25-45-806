@@ -12,6 +12,10 @@ public class Student extends Person{
         return this.klass;
     }
 
+    public void setKlass(Klass klass){
+        this.klass=klass;
+    }
+
     @Override
     public String introduce() {
         boolean isLeader = this.klass.getLeader() != null && this.klass.getLeader().equals(this);
