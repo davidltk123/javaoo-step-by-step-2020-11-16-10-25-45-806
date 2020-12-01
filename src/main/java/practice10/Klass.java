@@ -7,11 +7,14 @@ public class Klass {
     private int number;
     private Student leader;
     private List<Student> students;
-    private Teacher teacher;
+    private List<JoinObserver> joinObservers;
+    private List<AssignLeaderObserver> assignLeaderObservers;
 
     public Klass(int number) {
         this.number = number;
-        this.students = new ArrayList<Student>();
+        this.students = new ArrayList<>();
+        this.joinObservers = new ArrayList<>();
+        this.assignLeaderObservers = new ArrayList<>();
     }
 
     public int getNumber() {
@@ -25,20 +28,18 @@ public class Klass {
     public void assignLeader(Student leader) {
         if (students.contains(leader)) {
             this.leader = leader;
-            notisfyTeacher(leader);
+            assignLeaderObservers.forEach(observer -> observer.receiveNewLeader(leader, this));
         } else {
             System.out.print("It is not one of us.\n");
         }
     }
 
-    public void assignTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void registerJoinObserver(JoinObserver observer) {
+        this.joinObservers.add(observer);
     }
 
-    public void notisfyTeacher(Student student) {
-        if (this.teacher != null) {
-            this.teacher.introduceNew(student);
-        }
+    public void registerAssignLeaderObserver(AssignLeaderObserver observer) {
+        this.assignLeaderObservers.add(observer);
     }
 
     public void appendMember(Student student) {
@@ -46,7 +47,7 @@ public class Klass {
         if (!student.getKlass().equals(this)) {
             student.setKlass(this);
         }
-        this.notisfyTeacher(student);
+        joinObservers.forEach(observer -> observer.receiveNewJoiner(student, this));
     }
 
     public boolean isIn(Student student) {

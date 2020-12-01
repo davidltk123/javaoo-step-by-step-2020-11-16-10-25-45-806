@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Teacher extends Person {
+public class Teacher extends Person implements JoinObserver, AssignLeaderObserver {
     private List<Klass> classes = new ArrayList<Klass>();
 
     public Teacher(int id, String name, int age) {
@@ -15,9 +15,10 @@ public class Teacher extends Person {
         super(id, name, age);
         this.classes = classes;
         if (!this.classes.isEmpty()) {
-            for (Klass kclass : this.classes) {
-                kclass.assignTeacher(this);
-            }
+            this.classes.forEach(klass -> {
+                klass.registerJoinObserver(this);
+                klass.registerAssignLeaderObserver(this);
+            });
         }
     }
 
@@ -39,11 +40,13 @@ public class Teacher extends Person {
         return this.classes.stream().filter(_class -> _class.isIn(student)).count() > 0;
     }
 
-    public void introduceNew(Student student) {
-        if (student.equals(student.getKlass().getLeader())) {
-            System.out.print(String.format("I am %s. I know %s become Leader of %s.\n", this.getName(), student.getName(), student.getKlass().getDisplayName()));
-        } else {
-            System.out.print(String.format("I am %s. I know %s has joined %s.\n", this.getName(), student.getName(), student.getKlass().getDisplayName()));
-        }
+    @Override
+    public void receiveNewLeader(Student student, Klass klass) {
+        System.out.print(String.format("I am %s. I know %s become Leader of %s.\n", this.getName(), student.getName(), student.getKlass().getDisplayName()));
+    }
+
+    @Override
+    public void receiveNewJoiner(Student student, Klass klass) {
+        System.out.print(String.format("I am %s. I know %s has joined %s.\n", this.getName(), student.getName(), student.getKlass().getDisplayName()));
     }
 }
