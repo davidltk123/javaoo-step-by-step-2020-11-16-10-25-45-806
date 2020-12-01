@@ -19,10 +19,6 @@ public class Person {
         return age;
     }
 
-    public int getID() {
-        return id;
-    }
-
     public String introduce() {
         return String.format("My name is %s. I am %s years old.", this.name, this.age);
     }
