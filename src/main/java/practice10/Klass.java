@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Klass {
-    private int number;
+    private final int number;
     private Student leader;
-    private List<Student> students;
-    private List<JoinObserver> joinObservers;
-    private List<AssignLeaderObserver> assignLeaderObservers;
+    private final List<Student> students;
+    private final List<JoinObserver> joinObservers;
+    private final List<AssignLeaderObserver> assignLeaderObservers;
 
     public Klass(int number) {
         this.number = number;
