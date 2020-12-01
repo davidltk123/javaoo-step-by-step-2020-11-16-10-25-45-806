@@ -27,10 +27,10 @@ public class Teacher extends Person {
     @Override
     public String introduce() {
         String classesString = this.classes.stream().map(_class -> String.valueOf(_class.getNumber())).collect(Collectors.joining(", "));
-        return String.format("%s I am a Teacher. I teach %s.", super.introduce(), (this.classes.isEmpty() ? "No Class" : "Class "+classesString));
+        return String.format("%s I am a Teacher. I teach %s.", super.introduce(), (this.classes.isEmpty() ? "No Class" : "Class " + classesString));
     }
 
     public boolean isTeaching(Student student) {
-        return this.classes.stream().filter(_class -> _class.isIn(student)).count()>0;
+        return this.classes.stream().filter(_class -> _class.isIn(student)).count() > 0;
     }
 }

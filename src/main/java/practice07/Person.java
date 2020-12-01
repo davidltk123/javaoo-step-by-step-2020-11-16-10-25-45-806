@@ -4,6 +4,7 @@ public class Person {
     private String name;
     private int age;
     private int id;
+
     public Person(int id, String name, int age) {
         this.name = name;
         this.age = age;
@@ -18,12 +19,12 @@ public class Person {
         return age;
     }
 
-    public int getID(){
+    public int getID() {
         return id;
     }
 
-    public String introduce(){
-        return String.format("My name is %s. I am %s years old.",this.name,this.age);
+    public String introduce() {
+        return String.format("My name is %s. I am %s years old.", this.name, this.age);
     }
 
     @Override

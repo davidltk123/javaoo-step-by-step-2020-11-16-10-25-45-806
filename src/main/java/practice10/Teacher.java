@@ -14,8 +14,8 @@ public class Teacher extends Person {
     public Teacher(int id, String name, int age, List<Klass> classes) {
         super(id, name, age);
         this.classes = classes;
-        if(!this.classes.isEmpty()){
-            for(Klass kclass: this.classes){
+        if (!this.classes.isEmpty()) {
+            for (Klass kclass : this.classes) {
                 kclass.assignTeacher(this);
             }
         }
@@ -32,18 +32,18 @@ public class Teacher extends Person {
     @Override
     public String introduce() {
         String classesString = this.classes.stream().map(_class -> String.valueOf(_class.getNumber())).collect(Collectors.joining(", "));
-        return String.format("%s I am a Teacher. I teach %s.", super.introduce(), (this.classes.isEmpty() ? "No Class" : "Class "+classesString));
+        return String.format("%s I am a Teacher. I teach %s.", super.introduce(), (this.classes.isEmpty() ? "No Class" : "Class " + classesString));
     }
 
     public boolean isTeaching(Student student) {
-        return this.classes.stream().filter(_class -> _class.isIn(student)).count()>0;
+        return this.classes.stream().filter(_class -> _class.isIn(student)).count() > 0;
     }
 
     public void introduceNew(Student student) {
-        if(student.equals(student.getKlass().getLeader())){
-            System.out.print(String.format("I am %s. I know %s become Leader of %s.\n",this.getName(),student.getName(),student.getKlass().getDisplayName()));
-        }else{
-            System.out.print(String.format("I am %s. I know %s has joined %s.\n",this.getName(),student.getName(),student.getKlass().getDisplayName()));
+        if (student.equals(student.getKlass().getLeader())) {
+            System.out.print(String.format("I am %s. I know %s become Leader of %s.\n", this.getName(), student.getName(), student.getKlass().getDisplayName()));
+        } else {
+            System.out.print(String.format("I am %s. I know %s has joined %s.\n", this.getName(), student.getName(), student.getKlass().getDisplayName()));
         }
     }
 }

@@ -4,23 +4,23 @@ public class Klass {
     private int number;
     private Student leader;
 
-    public Klass(int number){
-        this.number=number;
+    public Klass(int number) {
+        this.number = number;
     }
 
-    public int getNumber(){
+    public int getNumber() {
         return this.number;
     }
 
-    public Student getLeader(){
+    public Student getLeader() {
         return leader;
     }
 
-    public void assignLeader(Student leader){
+    public void assignLeader(Student leader) {
         this.leader = leader;
     }
 
-    public String getDisplayName(){
-        return String.format("Class %s",this.number);
+    public String getDisplayName() {
+        return String.format("Class %s", this.number);
     }
 }
