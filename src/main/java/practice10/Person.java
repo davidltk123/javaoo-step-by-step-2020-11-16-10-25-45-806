@@ -1,9 +1,9 @@
 package practice10;
 
 public class Person {
-    private String name;
-    private int age;
-    private int id;
+    private final String name;
+    private final int age;
+    private final int id;
 
     public Person(int id, String name, int age) {
         this.name = name;
