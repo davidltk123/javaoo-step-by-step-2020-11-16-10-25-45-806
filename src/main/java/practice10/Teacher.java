@@ -37,7 +37,7 @@ public class Teacher extends Person implements JoinObserver, AssignLeaderObserve
     }
 
     public boolean isTeaching(Student student) {
-        return this.classes.stream().filter(_class -> _class.isIn(student)).count() > 0;
+        return this.classes.stream().anyMatch(klass -> klass.isIn(student));
     }
 
     @Override
