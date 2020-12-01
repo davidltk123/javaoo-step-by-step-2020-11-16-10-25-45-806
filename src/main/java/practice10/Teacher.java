@@ -42,11 +42,11 @@ public class Teacher extends Person implements JoinObserver, AssignLeaderObserve
 
     @Override
     public void receiveNewLeader(Student student, Klass klass) {
-        System.out.print(String.format("I am %s. I know %s become Leader of %s.\n", this.getName(), student.getName(), student.getKlass().getDisplayName()));
+        System.out.printf("I am %s. I know %s become Leader of %s.\n", this.getName(), student.getName(), student.getKlass().getDisplayName());
     }
 
     @Override
     public void receiveNewJoiner(Student student, Klass klass) {
-        System.out.print(String.format("I am %s. I know %s has joined %s.\n", this.getName(), student.getName(), student.getKlass().getDisplayName()));
+        System.out.printf("I am %s. I know %s has joined %s.\n", this.getName(), student.getName(), student.getKlass().getDisplayName());
     }
 }
